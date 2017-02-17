@@ -1,0 +1,7 @@
+#ifndef __SCP_SLAVE_H
+#define __SCP_SLAVE_H
+
+#include <stdint.h>
+#include "scp.h"
+
+#endif

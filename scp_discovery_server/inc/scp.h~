@@ -1,0 +1,45 @@
+#ifndef __SCP_H
+#define __SCP_H
+
+#include <stdint.h>
+#include "fifo.h"
+
+#define MAX_PACKET_RECEPTION 2
+
+#define UNIQ 0x96
+#define START 1
+#define STOP 2
+#define ITSELF 3
+#define NO_PROBLEM 4
+
+#define RX_FULL 5
+#define PARITY 6
+#define UNDEFINED 7
+
+void scp_init(void);
+uint8_t scp_send_packet(void *ptr, uint16_t cmd);
+void scp_thread(void);
+void put_to_scp(uint8_t d);
+void parity_err_warn_scp(void);
+
+void _scp_send_buf(uint8_t *p, uint8_t len) __attribute__ ((weak));
+void _scp_handler(void *ptr, uint8_t cmd) __attribute__ ((weak));
+void _scp_err_handler(uint8_t err_no) __attribute__((weak));
+
+extern uint8_t _tx_lock;
+#define scp_tx_lock() _tx_lock = 1
+#define scp_tx_unlock() _tx_lock = 0
+
+#define RESP ((uint16_t) 0x0100)
+
+// transmission errors
+#define E_SCP_SUCCESS 0
+#define E_SCP_FRAME 1
+#define E_SCP_FULL 2
+#define E_SCP_CMD 3
+#define E_SCP_CHECKSUM 4
+#define E_SCP_RX_FULL RX_FULL
+#define E_SCP_PARITY PARITY
+#define E_SCP_UNDEFINED UNDEFINED
+
+#endif

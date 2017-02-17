@@ -1,0 +1,36 @@
+# Selecting Core
+CORTEX_M=0
+
+# Use newlib-nano. To disable it, specify USE_NANO=
+USE_NANO=--specs=nano.specs
+
+# Use seimhosting or not
+USE_SEMIHOST=--specs=rdimon.specs
+USE_NOHOST=--specs=nosys.specs
+
+CORE=CM$(CORTEX_M)
+
+# Compiler & Linker
+CC=arm-none-eabi-gcc
+CXX=arm-none-eabi-g++
+
+# Options for specific architecture
+ARCH_FLAGS=-mthumb -mcpu=cortex-m$(CORTEX_M)
+
+# Startup code
+STARTUP=../src/startup_ARM$(CORE).S
+
+# Library headers
+STDPERIPH_INC=/home/mehmet/Documents/arm_tools/STM32F0xx_StdPeriph_Lib_V1.5.0/Libraries/STM32F0xx_StdPeriph_Driver/inc
+CMSIS_INC=/home/mehmet/Documents/arm_tools/STM32F0xx_StdPeriph_Lib_V1.5.0/Libraries/CMSIS/Include
+
+# -ffunction-sections -fdata-sections to compile for code size
+CFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -ffunction-sections -fdata-sections -iquote ../inc -iquote $(STDPERIPH_INC) -I $(CMSIS_INC) -std=c99
+CXXFLAGS=$(CFLAGS)
+
+# Link for code size
+GC=-Wl,--gc-sections
+
+# Create map file
+MAP=-Wl,-Map=$(NAME).map
+

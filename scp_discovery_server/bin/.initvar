@@ -1,0 +1,11 @@
+# address, string, type, static , buffer, loc
+0x1,test_uint8_t,uint8_t,0,pinned,0
+0x2,test_uint16_t,uint16_t,0,pinned,1
+0x3,test_uint32_t,uint32_t,0,pinned,2
+0x4,test_uint64_t,uint64_t,0,pinned,3
+0x5,test_int8_t,int8_t,0,pinned,4
+0x6,test_int16_t,int16_t,0,pinned,5
+0x7,test_int32_t,int32_t,0,pinned,6
+0x8,test_int64_t,int64_t,0,pinned,7
+0x9,test_float,float,1,pinned,8
+

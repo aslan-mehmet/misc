@@ -1,0 +1,13 @@
+#ifndef __SCP_MASTER_CMDS_H
+#define __SCP_MASTER_CMDS_H
+
+/*
+ * data type sizes
+ * float 4
+ * double 8
+ * integers stdint
+ */
+
+#define
+
+#endif

@@ -1,0 +1,26 @@
+include makefile.conf
+NAME=main
+STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main -D STM32F051 \
+-D HSE_VALUE=8000000 -D USE_STDPERIPH_DRIVER
+
+LDSCRIPTS=-L. -T gcc.ld
+LFLAGS=$(USE_NANO) $(USE_NOHOST) $(LDSCRIPTS) $(GC) $(MAP)
+
+STDPERIPH_SRC=/home/mehmet/Documents/arm_tools/STM32F0xx_StdPeriph_Lib_V1.5.0/Libraries/STM32F0xx_StdPeriph_Driver/src
+
+$(NAME).elf: ../src/$(NAME).c $(STARTUP) \
+	../src/*.c \
+	$(STDPERIPH_SRC)/*.c
+	$(CC) $^ $(CFLAGS) $(LFLAGS) -o $@
+
+clean:
+	rm -f $(NAME)*.elf *.map *.o
+
+# make creates executable. binary command gives actual memory
+# also can use gdb to flash .elf file
+binary:
+	arm-none-eabi-objcopy -O binary $(NAME)-$(CORE).elf $(NAME).bin
+
+# texane/stlink
+flash:
+	st-flash write $(NAME).bin 0x8000000

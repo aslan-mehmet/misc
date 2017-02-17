@@ -1,0 +1,7 @@
+telnet localhost 4444
+poll
+reset halt
+
+arm-none-eabi-gdb main.elf
+target remote :3333
+

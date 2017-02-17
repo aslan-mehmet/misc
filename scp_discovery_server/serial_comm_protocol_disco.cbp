@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="serial_comm_protocol_disco" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/serial_comm_protocol_disco" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/serial_comm_protocol_disco" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="clock.png" />
+		<Unit filename="inc/board.h" />
+		<Unit filename="inc/delay.h" />
+		<Unit filename="inc/fifo.h" />
+		<Unit filename="inc/scp.h~" />
+		<Unit filename="inc/scp_master_cmds.h~" />
+		<Unit filename="inc/scp_slave.h~" />
+		<Unit filename="inc/sp.h" />
+		<Unit filename="inc/stm32f0xx.h" />
+		<Unit filename="inc/stm32f0xx_conf.h" />
+		<Unit filename="inc/stm32f0xx_it.h" />
+		<Unit filename="inc/system_stm32f0xx.h" />
+		<Unit filename="inc/usart1.h" />
+		<Unit filename="pins" />
+		<Unit filename="src/board.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/delay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/fifo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/main.c~" />
+		<Unit filename="src/scp_slave.c~" />
+		<Unit filename="src/sp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/startup_stm32f051x8.s" />
+		<Unit filename="src/stm32f0xx_it.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/system_stm32f0xx.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/usart1.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tools/Makefile" />
+		<Unit filename="tools/Makefile~" />
+		<Unit filename="tools/STM32F051R8_FLASH.ld" />
+		<Unit filename="tools/gcc.ld~" />
+		<Unit filename="tools/makefile.conf" />
+		<Unit filename="tools/makefile.conf~" />
+		<Unit filename="tools/notes" />
+		<Unit filename="tools/stlink-v2.cfg" />
+		<Unit filename="tools/stm32f0x.cfg" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
