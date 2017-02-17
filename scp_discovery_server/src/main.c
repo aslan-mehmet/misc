@@ -100,6 +100,7 @@ int sp_tx_send(uint8_t *ptr, uint8_t len)
         sp_reg &= ~sp_tx_lock;
 }
 
+/* this function is not working core stops working it goes Reset_Handler*/
 void sp_handler(void *vptr, uint16_t addr)
 {
         led_toggle(BLUE);
