@@ -23,6 +23,15 @@ void usart1_init(void)
 	u.USART_BaudRate = 38400;
 
 	USART_Init(USART1, &u);
+#ifdef USART1_INTERRUPT
+        USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+
+        NVIC_InitTypeDef n;
+        n.NVIC_IRQChannel = USART1_IRQn;
+        n.NVIC_IRQChannelPriority = 0;
+        n.NVIC_IRQChannelCmd = ENABLE;
+        NVIC_Init(&n);
+#endif // USART1_INTERRUPT
 
 	USART_Cmd(USART1, ENABLE);
 }
@@ -46,3 +55,12 @@ int _write(int file, char *ptr, int len)
         }
         return i;
 }
+
+//void USART1_IRQHandler(void)
+//{
+//        if (USART_GetITStatus(USART1, USART_IT_RXNE) == SET) {
+//                uint8_t data = USART_ReceiveData(USART1);
+//
+//                USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+//        }
+//}

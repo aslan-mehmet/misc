@@ -36,13 +36,6 @@ extern uint8_t sp_reg;
 #define sp_rx_lock 2
 #define sp_start_rcvd 4
 
-struct _spacket{
-	uint8_t vsize; 		/* sizeof packet variable */
-	uint16_t addr; 		/* packet address */
-};
-
-typedef struct _spacket spacket;
-
 /* check it must return 0
  * otherwise it could not allocate memory space for internal buffer
  */
@@ -61,13 +54,12 @@ void sp_decode(void);
 #define INT64_T 8
 #define FLOAT 4
 #define DOUBLE 8
-void spacket_init(uint8_t data_type, uint16_t packet_addr, spacket *p);
 
 /*
  * vptr supports all data types but only one of them for a single packet
  * implicitly locks sp_tx_lock you have to unlock at sp_tx_send
  */
-int sp_encode(void *vptr, spacket packet);
+int sp_encode(void *vptr, uint8_t vsize, uint16_t addr);
 /* write to serial packet fifo rx
  * put uint8_t values from usart
  */

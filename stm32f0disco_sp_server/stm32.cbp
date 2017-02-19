@@ -2,24 +2,24 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="serial_comm_protocol_disco" />
+		<Option title="stm32" />
 		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option compiler="arm-elf-gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/serial_comm_protocol_disco" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/stm32" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="arm-elf-gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/serial_comm_protocol_disco" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/stm32" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="arm-elf-gcc" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
@@ -32,6 +32,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="clock.png" />
+		<Unit filename="inc/bits.h" />
 		<Unit filename="inc/board.h" />
 		<Unit filename="inc/delay.h" />
 		<Unit filename="inc/fifo.h" />
@@ -76,10 +77,14 @@
 		<Unit filename="tools/Makefile~" />
 		<Unit filename="tools/STM32F051R8_FLASH.ld" />
 		<Unit filename="tools/gcc.ld~" />
+		<Unit filename="tools/main.bin" />
+		<Unit filename="tools/main.elf" />
+		<Unit filename="tools/main.map" />
 		<Unit filename="tools/makefile.conf" />
 		<Unit filename="tools/makefile.conf~" />
 		<Unit filename="tools/notes" />
 		<Unit filename="tools/stlink-v2.cfg" />
+		<Unit filename="tools/stm32_reset.pl" />
 		<Unit filename="tools/stm32f0x.cfg" />
 		<Extensions>
 			<code_completion />
