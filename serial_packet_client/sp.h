@@ -11,7 +11,6 @@
 #define __SP_H
 
 #include <stdint.h>
-#include "bits.h"
 
 #define PCL 12			/* packet content len for size + 8 byte + addr + checksum */
 #define MPL 28          	/* max packet len (4 + PCL*2) */
@@ -33,16 +32,9 @@
 #define SPE_TX_FULL 8 		/* doesnt fit to MPL */
 
 extern uint8_t sp_reg;
-#define sp_tx_lock BIT8_0
-#define sp_rx_lock BIT8_1
-#define sp_start_rcvd BIT8_2
-
-struct _spacket{
-	uint8_t vsize; 		/* sizeof packet variable */
-	uint16_t addr; 		/* packet address */
-};
-
-typedef struct _spacket spacket;
+#define sp_tx_lock 1
+#define sp_rx_lock 2
+#define sp_start_rcvd 4
 
 /* check it must return 0
  * otherwise it could not allocate memory space for internal buffer
@@ -62,13 +54,12 @@ void sp_decode(void);
 #define INT64_T 8
 #define FLOAT 4
 #define DOUBLE 8
-void spacket_init(uint8_t data_type, uint16_t packet_addr, spacket *p);
 
 /*
  * vptr supports all data types but only one of them for a single packet
  * implicitly locks sp_tx_lock you have to unlock at sp_tx_send
  */
-int sp_encode(void *vptr, spacket packet);
+int sp_encode(void *vptr, uint8_t vsize, uint16_t addr);
 /* write to serial packet fifo rx
  * put uint8_t values from usart
  */

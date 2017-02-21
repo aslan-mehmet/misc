@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1487693288 source:/home/mehmet/Documents/codeblocks/packet_client/main.c
+	<stdio.h>
+	<stdlib.h>
+	"io.h"
+	"sp.h"
+	<inttypes.h>
+	"screen.h"
+	<signal.h>
+	<unistd.h>
+	"rs232.h"
+
+1487687912 /home/mehmet/Documents/codeblocks/packet_client/io.h
+	<stdint.h>
+
+1487691938 source:/home/mehmet/Documents/codeblocks/packet_client/io.c
+	"io.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<inttypes.h>
+	"sp.h"
+	"screen.h"
+
+1482435312 source:/home/mehmet/Documents/codeblocks/packet_client/fifo.c
+	"fifo.h"
+
+1482251080 /home/mehmet/Documents/codeblocks/packet_client/fifo.h
+	<stdint.h>
+	<stdlib.h>
+
+1487486667 /home/mehmet/Documents/codeblocks/packet_client/sp.h
+	<stdint.h>
+
+1487487862 source:/home/mehmet/Documents/codeblocks/packet_client/sp.c
+	"sp.h"
+	"fifo.h"
+
+1487629224 /home/mehmet/Documents/codeblocks/packet_client/screen.h
+
+1487691969 source:/home/mehmet/Documents/codeblocks/packet_client/screen.c
+	"screen.h"
+	<ncurses.h>
+	<string.h>
+	<stdlib.h>
+	"io.h"
+
+1468137130 /home/mehmet/Documents/codeblocks/packet_client/rs232.h
+	<stdio.h>
+	<string.h>
+	<termios.h>
+	<sys/ioctl.h>
+	<unistd.h>
+	<fcntl.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<limits.h>
+	<sys/file.h>
+	<errno.h>
+	<windows.h>
+
+1468139231 source:/home/mehmet/Documents/codeblocks/packet_client/rs232.c
+	"rs232.h"
+

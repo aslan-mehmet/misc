@@ -29,6 +29,9 @@ static uint8_t rxi = 0;
 
 static fifo *pfrx;
 
+static uint64_t dword_bfr;
+static uint8_t *dword_ptr;
+
 int8_t sp_init(void)
 {
 	tx[0] = ESC_SP;
@@ -38,14 +41,14 @@ int8_t sp_init(void)
 	pfrx = &frx;
 	if (init_fifo(pfrx, FRXS))
 		return -1;
-	
-	return 0;
-}
 
-void spacket_init(uint8_t data_type, uint16_t packet_addr, spacket *p)
-{
-        p->vsize = data_type;
-        p->addr = packet_addr;
+        dword_ptr = (uint8_t *) &dword_bfr;
+
+        /* dword has to be aligned, otherwise huge problem */
+        if (((uint32_t) dword_ptr) & ((uint32_t) 0x3))
+                return -2;
+
+	return 0;
 }
 
 /*
@@ -64,10 +67,10 @@ static void put_tx(uint8_t b)
 	tx[txi++] = b;
 
 	if (b == ESC_SP && txi != MPL)
-              tx[txi++] = ESC_SELF;  
+              tx[txi++] = ESC_SELF;
 }
 
-int sp_encode(void *vptr, spacket packet)
+int sp_encode(void *vptr, uint8_t vsize, uint16_t addr)
 {
 	if (sp_reg & sp_tx_lock)
 		return -1;
@@ -77,15 +80,15 @@ int sp_encode(void *vptr, spacket packet)
 
 	txi = 2;
 
-	put_tx(packet.vsize);
+	put_tx(vsize);
 
-	for (int i = 0; i < packet.vsize; ++i) {
+	for (int i = 0; i < vsize; ++i) {
 		cs ^= ptr[i];
 
 		put_tx(ptr[i]);
 	}
 
-	uint8_t *tp = (uint8_t *) (&packet.addr);
+	uint8_t *tp = (uint8_t *) &addr;
 
 	for (int i = 0; i < 2; ++i) {
 		cs ^= tp[i];
@@ -100,7 +103,7 @@ int sp_encode(void *vptr, spacket packet)
 		sp_error(SPE_TX_FULL);
 		return -2;
 	}
-	
+
 	tx[txi++] = ESC_SP;
 	tx[txi++] = ESC_STOP;
 
@@ -111,7 +114,7 @@ int sp_encode(void *vptr, spacket packet)
 	return 0;
 }
 
-/* 
+/*
  * DECODING PART
  */
 
@@ -126,15 +129,17 @@ static void process_rx(void)
 	uint16_t addr;
 	uint8_t *paddr = (uint8_t *) (&addr);
 	uint8_t cs = 0;
-	
+
 	/* check if packet right size */
 	if (rxi != var_size + 4) {
 		sp_error(SPE_LEN);
 		return;
 	}
 
-	for (int i = 0; i < var_size; ++i)
+	for (int i = 0; i < var_size; ++i) {
+                dword_ptr[i] = rx[i+1];
 		cs ^= rx[i+1];
+        }
 
 
 	cs ^= addrl;
@@ -142,7 +147,7 @@ static void process_rx(void)
 
 	if (cs != rcvd_cs) {
 		sp_error(SPE_CS);
-                return;	
+                return;
         }
 
 	paddr[0] = addrl;
@@ -151,7 +156,7 @@ static void process_rx(void)
         sp_error(SPE_SUCCESS);
 
 	sp_reg |= sp_rx_lock;
-	sp_handler(rx + 1, addr);
+	sp_handler(dword_ptr, addr);
 }
 
 static void put_rx(uint8_t v)
@@ -188,7 +193,7 @@ void sp_decode(void)
 			case ESC_STOP:
 				if (sp_reg & sp_start_rcvd)
 					process_rx();
-			
+
 				sp_reg &= ~sp_start_rcvd;
 				break;
 			case ESC_PAR:
