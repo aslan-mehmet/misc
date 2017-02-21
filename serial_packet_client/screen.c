@@ -1,3 +1,12 @@
+/*
+ * author: Mehmet ASLAN
+ * date: February 16, 2017
+ *
+ * no warranty, no licence agreement
+ * all modifications allowed, just state any changes
+ * use it at your own risk
+ */
+
 #include "screen.h"
 #include <ncurses.h>
 #include <string.h>
