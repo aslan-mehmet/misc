@@ -22,10 +22,11 @@ int main()
         // total sampling time 10 sec
         // sampling freq 44100
         // headerless, float 32bit, raw file
+        // 100 Hz sine signal
         FILE *f = fopen("sine.raw", "rb");
 
         if (f == NULL) {
-                printf("f can not opened\n");
+                printf("sine.raw can not opened\n");
                 return -1;
         }
 
@@ -48,7 +49,7 @@ int main()
         fftw_complex *out;
         fftw_plan p;
 
-        in = (double *) malloc(sizeof(double) * N);
+        in = (double *) fftw_malloc(sizeof(double) * N);
         out = (fftw_complex *) fftw_malloc(sizeof(fftw_complex) * OUT_N);
 
         p = fftw_plan_dft_r2c_1d(N, in, out, FFTW_ESTIMATE);
@@ -91,9 +92,26 @@ int main()
                 fprintf(phase, "%f %f\n", i/((double) T), atan(img / real));
         }
 
+        p = fftw_plan_dft_c2r_1d(N, out, in, FFTW_ESTIMATE);
+        fftw_execute(p);
+
+        FILE *sig = fopen("signal.dat", "w");
+
+        if (sig == NULL) {
+                printf("signal file can not opened\n");
+                return -1;
+        }
+
+        fprintf(sig, "#in_sec amplitude");
+
+        for (int i = 0; i < N; ++i)
+                fprintf(sig, "%f %f\n", (1.0/44100)*i, in[i] / (double) N);
+
+        fclose(sig);
         fclose(mag);
         fclose(phase);
         fftw_destroy_plan(p);
+        fftw_free(in);
         fftw_free(out);
         fclose(period);
         fclose(f);
