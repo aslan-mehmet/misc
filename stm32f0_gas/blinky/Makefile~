@@ -1,0 +1,10 @@
+program: link
+
+link: assemble
+	arm-none-eabi-ld -T stm32f051.ld -Map=main.map main.o -o main.elf
+
+assemble:
+	arm-none-eabi-as *.s -mthumb -mcpu=cortex-m0 -g -o main.o
+
+binary:
+	arm-none-eabi-objcopy -O binary main.elf main.bin
