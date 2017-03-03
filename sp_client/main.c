@@ -12,10 +12,10 @@ void update_status(void);
 
 int port_number = 16;
 int is_port_open = 1;
-int rcvd_successful_packet = 0;
-int rcvd_faulty_packet = 0;
-int sent_packet_successful = 0;
-int sent_packet_faulty = 0;
+int rplus = 0;
+int rminus = 0;
+int splus = 0;
+int sminus = 0;
 
 void sig_handler(int signum)
 {
@@ -101,8 +101,8 @@ int main()
 void update_status(void)
 {
         char buf[81];
-        snprintf(buf, 81, "rcvd_suc: %d rcvd_fault: %d sent_suc: %d sent_fault: %d",
-                        rcvd_successful_packet, rcvd_faulty_packet, sent_packet_successful, sent_packet_faulty);
+        snprintf(buf, 81, "r+: %d r-: %d s+: %d s-: %d",
+                        rplus, rminus, splus, sminus);
 
         print_to_screen(buf, 0);
 }
@@ -123,9 +123,9 @@ void examine_response_packet(uint8_t *p)
         uint8_t v = *p;
 
         if (v == 0)
-                sent_packet_successful++;
+                splus++;
         else if (v < 9)
-                sent_packet_faulty++;
+                sminus++;
         else
                 v = 10;
 
@@ -150,7 +150,7 @@ void sp_handler(void *vptr, uint16_t addr)
 void sp_error(uint8_t n)
 {
         if (n == 0)
-                rcvd_successful_packet++;
+                rplus++;
         else if (n < 9)
-                rcvd_faulty_packet++;
+                rminus++;
 }

@@ -1,0 +1,9 @@
+# this is a comment line
+# single packet consist: ; name addr type mode
+# locking system: $ name
+
+; float 1 float w
+
+$ float
+
+

@@ -1,0 +1,27 @@
+author: Mehmet ASLAN
+date: march 3, 2017
+
+Serial Packet Client
+
+description
+	serial packet decoder for computer. gets all data from usart and displays
+to screen.
+
+how to use
+1. create spinit file, accepts line oriented input
+
+2. how commenting done?
+
+# this is a comment line
+
+3. define each packet name, addr, type and mode. example;
+
+; adc 1 uint16_t r // add adc named packet, read only
+$ adc // this pins adc to a line(no scrolling occurs), fast data stream can be seem this way
+; dc_motor 2 uint8_t w // read and write access
+
+4. view data and send packet
+	
+	all defined packets will be shown. sending packet example;
+dc_motor 255
+
