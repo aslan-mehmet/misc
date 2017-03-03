@@ -42,10 +42,20 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="main.h" />
+		<Unit filename="rs232.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="rs232.h" />
+		<Unit filename="screen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="screen.h" />
 		<Unit filename="sp.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sp.h" />
+		<Unit filename="spinit" />
 		<Extensions>
 			<code_completion />
 			<debugger />

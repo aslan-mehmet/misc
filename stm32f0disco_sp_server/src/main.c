@@ -49,4 +49,5 @@ void sp_handler(void *vptr, uint16_t addr)
 }
 void sp_error(uint8_t n)
 {
+	sp_encode(&n, UINT8_T, 0);
 }

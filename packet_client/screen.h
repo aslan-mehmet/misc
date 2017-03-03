@@ -1,12 +1,3 @@
-/*
- * author: Mehmet ASLAN
- * date: February 16, 2017
- *
- * no warranty, no licence agreement
- * all modifications allowed, just state any changes
- * use it at your own risk
- */
-
 #ifndef __SCREEN_H
 #define __SCREEN_H
 
