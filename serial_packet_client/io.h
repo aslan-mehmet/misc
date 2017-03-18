@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#define DUMP_MODE_TEXT 1
+#define DUMP_MODE_HEX 2
+
 typedef struct{
         char *name;
         uint16_t addr;

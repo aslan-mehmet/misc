@@ -34,6 +34,7 @@ int g_packet_pin_iter = 0;
 extern int should_dump;
 extern FILE *dump_file;
 extern int is_port_open;
+extern int dump_mode;
 FILE *packet_file = NULL;
 int dumping_packet_number = -1;
 
@@ -372,16 +373,20 @@ void dump_data(void)
         should_dump = 1;
         uint8_t buf[20];
         size_t read = 0;
+        char packet_file_mode[3] = {'w', '\0', '\0'};
+
+        if (dump_mode == DUMP_MODE_HEX) {
+                packet_file_mode[1] = 'b';
+        }
 
         for (int i = 0; i < packets_iter; ++i) {
                 dumping_packet_number = i;
 
-                packet_file = fopen(packets[i].name, "w");
-                fprintf(packet_file, "%s\n", packets[i].name);
+                packet_file = fopen(packets[i].name, packet_file_mode);
 
                 if (packet_file == NULL) {
                         fprintf(stderr, "%s packet dump failed\n", packets[i].name);
-			continue;
+                        continue;
                 }
 
                 fseek(dump_file, 0, SEEK_SET);
@@ -405,7 +410,11 @@ void saved_packet_handler(void *vptr, uint16_t addr)
                 return;
         }
 
-        if (addr == packets[dumping_packet_number].addr) {
+        if (addr != packets[dumping_packet_number].addr) {
+                return;
+        }
+
+        if (dump_mode == DUMP_MODE_TEXT) {
                 char display_str[200];
 
                 switch (packets[dumping_packet_number].type_number) {
@@ -442,5 +451,7 @@ void saved_packet_handler(void *vptr, uint16_t addr)
                 }
 
                 fprintf(packet_file, "%s\n", display_str);
+        } else if (dump_mode == DUMP_MODE_HEX) {
+                fwrite((uint8_t *) vptr, sizeof(uint8_t), get_data_size(packets[dumping_packet_number].type_number),packet_file);
         }
 }

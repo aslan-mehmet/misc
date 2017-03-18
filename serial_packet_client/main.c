@@ -28,6 +28,7 @@ int splus = 0; // send packet
 int sminus = 0;
 int should_dump = 0;
 FILE *dump_file = NULL;
+int dump_mode = DUMP_MODE_TEXT;
 
 // exit program properly
 void sig_handler(int signum)
@@ -78,15 +79,16 @@ int main(int argc, char **argv)
 
         static struct option long_options[] =
         {
-                {"baud",       required_argument, NULL, 'b'},
+                {"speed",      required_argument, NULL, 's'},
                 {"dump",       required_argument, NULL, 'd'},
-                {"port",       required_argument, NULL, 'p'}
+                {"port",       required_argument, NULL, 'p'},
+                {"binary",     no_argument,       NULL, 'b'}
         };
 
-        while ((c = getopt_long(argc, argv, "b:d:p:", long_options, NULL)) != EOF) {
+        while ((c = getopt_long(argc, argv, "s:d:p:b", long_options, NULL)) != EOF) {
                 int tmp = -1;
                 switch (c) {
-                case 'b':
+                case 's':
                         // dont pass non standart baudrate i dont check
                         sscanf(optarg, "%d", &baudrate);
                         break;
@@ -108,6 +110,9 @@ int main(int argc, char **argv)
                                 port_number += tmp;
                         }
 
+                        break;
+                case 'b':
+                        dump_mode = DUMP_MODE_HEX;
                         break;
                 }
         }
