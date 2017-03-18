@@ -381,6 +381,7 @@ void dump_data(void)
 
                 if (packet_file == NULL) {
                         fprintf(stderr, "%s packet dump failed\n", packets[i].name);
+			continue;
                 }
 
                 fseek(dump_file, 0, SEEK_SET);
