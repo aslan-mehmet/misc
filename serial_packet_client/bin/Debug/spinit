@@ -1,0 +1,16 @@
+# this is a comment line
+# single packet consist: ; name addr type mode
+# locking system: $ name
+
+# your packet definitions, commands start here
+# you can also tell client to send packets at startup
+# example
+# ; dc_motor 1 uint16_t w
+# $ dc_motor
+# dc_motor 45
+
+; float 1 float w
+
+$ float
+
+
