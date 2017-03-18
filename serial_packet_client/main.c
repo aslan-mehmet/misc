@@ -83,7 +83,7 @@ int main(int argc, char **argv)
                 {"port",       required_argument, NULL, 'p'}
         };
 
-        while ((c = getopt_long(argc, argv, "b:s:p:", long_options, NULL)) != EOF) {
+        while ((c = getopt_long(argc, argv, "b:d:p:", long_options, NULL)) != EOF) {
                 int tmp = -1;
                 switch (c) {
                 case 'b':

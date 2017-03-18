@@ -381,7 +381,6 @@ void dump_data(void)
 
                 if (packet_file == NULL) {
                         fprintf(stderr, "%s packet dump failed\n", packets[i].name);
-                        continue;
                 }
 
                 fseek(dump_file, 0, SEEK_SET);
@@ -441,6 +440,6 @@ void saved_packet_handler(void *vptr, uint16_t addr)
                         break;
                 }
 
-                fprintf(dump_file, "%s\n", display_str);
+                fprintf(packet_file, "%s\n", display_str);
         }
 }

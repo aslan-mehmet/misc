@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1489819937 source:/home/mehmet/Documents/codeblocks/packet_client/main.c
+1489823278 source:/home/mehmet/Documents/codeblocks/packet_client/main.c
 	<stdio.h>
 	<stdlib.h>
 	"io.h"
@@ -14,7 +14,7 @@
 1489817613 /home/mehmet/Documents/codeblocks/packet_client/io.h
 	<stdint.h>
 
-1489819894 source:/home/mehmet/Documents/codeblocks/packet_client/io.c
+1489822997 source:/home/mehmet/Documents/codeblocks/packet_client/io.c
 	"io.h"
 	<stdio.h>
 	<stdlib.h>
@@ -39,7 +39,7 @@
 
 1487629224 /home/mehmet/Documents/codeblocks/packet_client/screen.h
 
-1489783247 source:/home/mehmet/Documents/codeblocks/packet_client/screen.c
+1489821129 source:/home/mehmet/Documents/codeblocks/packet_client/screen.c
 	"screen.h"
 	<ncurses.h>
 	<string.h>
